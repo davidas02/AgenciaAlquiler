@@ -11,7 +11,6 @@ package com.sauces.AgenciaAlquiler;
  */
 public class Turismo extends Vehiculo {
     int plazas;
-    Grupo A,B;
     public Turismo(String matricula, Grupo grupo, int plazas) {
         super(matricula, grupo);
         this.plazas = plazas;
@@ -19,27 +18,27 @@ public class Turismo extends Vehiculo {
 
     @Override
     public String toString() {
-        return super.toString()+" "+ plazas;
+        return super.toString()+" , "+ plazas;
     }
     public float getPrecioAlquiler(){
     float precioAlquiler;
-    if(grupo==A){
-     precioAlquiler=50+1.5f*plazas; 
+    if(grupo==Grupo.A){
+     precioAlquiler=+1.5f*plazas; 
     }else{
-    if(grupo==B){
-        precioAlquiler=55*2*plazas;
+    if(grupo==Grupo.B){
+        precioAlquiler=+2*plazas;
     }else{
-    precioAlquiler=60*2.5f*plazas;
+    precioAlquiler=2.5f*plazas;
     }
             }
     return precioAlquiler;
     }
     public float getPrecioAlquiler(int dias){
     float precioAlquiler;
-        if(grupo==A){
+        if(grupo==Grupo.A){
      precioAlquiler=50+1.5f*plazas; 
     }else{
-    if(grupo==B){
+    if(grupo==Grupo.B){
         precioAlquiler=55*2*plazas;
     }else{
     precioAlquiler=60*2.5f*plazas;

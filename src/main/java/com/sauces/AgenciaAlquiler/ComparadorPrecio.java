@@ -12,6 +12,7 @@ import java.util.Comparator;
  * @author PC
  */
 public class ComparadorPrecio implements Comparator<Vehiculo> {
+    @Override
     public int compare(Vehiculo v1, Vehiculo v2) {
         int salida = 0;
         float alquiler1, alquiler2;
@@ -24,6 +25,6 @@ public class ComparadorPrecio implements Comparator<Vehiculo> {
                 salida = 1;
             }
         }
-        return 0;
+        return salida;
     }
 }

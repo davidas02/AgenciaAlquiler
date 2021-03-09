@@ -11,7 +11,7 @@ package com.sauces.AgenciaAlquiler;
  */
 public class Furgoneta extends Vehiculo {
     float capacidad;
-    Grupo A,B;
+    
     public Furgoneta( String matricula, Grupo grupo ,float capacidad) {
         super(matricula, grupo);
         this.capacidad = capacidad;
@@ -22,11 +22,11 @@ public class Furgoneta extends Vehiculo {
         return super.toString()+" "+ capacidad ;
     }
     public float getPrecioAlquiler(){
-    float precioAlquiler;
-    if(grupo==A){
+    float precioAlquiler=0;
+    if(grupo==Grupo.A){
      precioAlquiler=50+1.5f*capacidad; 
     }else{
-    if(grupo==B){
+    if(grupo==Grupo.B){
         precioAlquiler=55*2*capacidad;
     }else{
     precioAlquiler=60*2.5f*capacidad;
@@ -36,10 +36,10 @@ public class Furgoneta extends Vehiculo {
     }
     public float getPrecioAlquiler(int dias){
     float precioAlquiler;
-        if(grupo==A){
+        if(grupo==Grupo.A){
      precioAlquiler=50+1.5f*capacidad; 
     }else{
-    if(grupo==B){
+    if(grupo==Grupo.B){
         precioAlquiler=55*2*capacidad;
     }else{
     precioAlquiler=60*2.5f*capacidad;

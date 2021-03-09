@@ -12,6 +12,7 @@ import java.util.Objects;
  * @author daw1
  */
 public abstract class Vehiculo implements Comparable<Vehiculo> {
+
     String matricula;
     Grupo grupo;
 
@@ -35,9 +36,8 @@ public abstract class Vehiculo implements Comparable<Vehiculo> {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 97 * hash + Objects.hashCode(this.matricula);
-        hash = 97 * hash + Objects.hashCode(this.grupo);
+        int hash = 5;
+        hash = 67 * hash + Objects.hashCode(this.matricula);
         return hash;
     }
 
@@ -46,31 +46,28 @@ public abstract class Vehiculo implements Comparable<Vehiculo> {
         if (this == o) {
             return true;
         }
-        if (o == null) {
-            return false;
+        if (o != null) {
+            if (o instanceof Vehiculo) {
+                Vehiculo v = (Vehiculo) o;
+                if (this.matricula.equals(v.matricula)) {
+                    return true;
+                }
+            }
         }
-        if (getClass() != o.getClass()) {
-            return false;
-        }
-        final Vehiculo other = (Vehiculo) o;
-        if (!Objects.equals(this.matricula, other.matricula)) {
-            return false;
-        }
-        if (this.grupo != other.grupo) {
-            return false;
-        }
-        return true;
+        return false;
     }
 
     public Grupo getGrupo() {
         return grupo;
     }
-    
+
     @Override
     public int compareTo(Vehiculo v) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    public abstract float getPrecioAlquiler();    
-    public abstract float getPrecioAlquiler(int dias); 
-    
+
+    public abstract float getPrecioAlquiler();
+
+    public abstract float getPrecioAlquiler(int dias);
+
 }
