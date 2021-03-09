@@ -21,32 +21,14 @@ public class Furgoneta extends Vehiculo {
     public String toString() {
         return super.toString()+" "+ capacidad ;
     }
-    public float getPrecioAlquiler(){
+public float getPrecioAlquiler(){
     float precioAlquiler=0;
-    if(grupo==Grupo.A){
-     precioAlquiler=50+1.5f*capacidad; 
-    }else{
-    if(grupo==Grupo.B){
-        precioAlquiler=55*2*capacidad;
-    }else{
-    precioAlquiler=60*2.5f*capacidad;
-    }
-            }
+    precioAlquiler=getGrupo().getPrecioA()+getGrupo().getPrecioB()*capacidad;
     return precioAlquiler;
     }
     public float getPrecioAlquiler(int dias){
-    float precioAlquiler;
-        if(grupo==Grupo.A){
-     precioAlquiler=50+1.5f*capacidad; 
-    }else{
-    if(grupo==Grupo.B){
-        precioAlquiler=55*2*capacidad;
-    }else{
-    precioAlquiler=60*2.5f*capacidad;
-    }
-    precioAlquiler=precioAlquiler*dias;
-    
-    }return precioAlquiler;
-    }
-    
+    float precioAlquilerDias;
+    precioAlquilerDias=(int)((getGrupo().getPrecioA()+getGrupo().getPrecioB()*capacidad)*dias);
+    return precioAlquilerDias;
+    } 
 }

@@ -10,9 +10,9 @@ package com.sauces.AgenciaAlquiler;
  * @author daw1
  */
 public enum Grupo {
-    A,
-    B,
-    C;
+    A(50,1.5f,5),
+    B(55,2,10),
+    C(60,2.5f,15);
     private final float precioA;
     private final float precioB;
     private final float precioC;
