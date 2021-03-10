@@ -10,9 +10,17 @@ package com.sauces.AgenciaAlquiler;
  * @author daw1
  */
 public class Turismo extends Vehiculo {
-    int plazas;
+    private int plazas;
     public Turismo(String matricula, Grupo grupo, int plazas) {
         super(matricula, grupo);
+        this.plazas = plazas;
+    }
+
+    public int getPlazas() {
+        return plazas;
+    }
+
+    public void setPlazas(int plazas) {
         this.plazas = plazas;
     }
 

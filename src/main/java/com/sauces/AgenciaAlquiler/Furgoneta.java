@@ -10,10 +10,18 @@ package com.sauces.AgenciaAlquiler;
  * @author daw1
  */
 public class Furgoneta extends Vehiculo {
-    float capacidad;
+    private float capacidad;
     
     public Furgoneta( String matricula, Grupo grupo ,float capacidad) {
         super(matricula, grupo);
+        this.capacidad = capacidad;
+    }
+
+    public float getCapacidad() {
+        return capacidad;
+    }
+
+    public void setCapacidad(float capacidad) {
         this.capacidad = capacidad;
     }
 

@@ -63,7 +63,7 @@ public abstract class Vehiculo implements Comparable<Vehiculo> {
 
     @Override
     public int compareTo(Vehiculo v) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.matricula.compareTo(v.matricula);
     }
 
     public abstract float getPrecioAlquiler();
