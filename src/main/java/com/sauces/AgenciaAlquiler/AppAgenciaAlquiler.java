@@ -97,16 +97,19 @@ public class AppAgenciaAlquiler {
                     teclado.nextLine();
                          switch(opcion1){
                             case 1: listado=aa.listarVehiculosPorPrecio();
+                                System.out.println(listado.toString());
                                 break;
                             case 2: for(Vehiculo veh:aa.getFlota()){
                                         if(veh instanceof Turismo){
-                                        listado.add(veh);
+                                            listado.add(veh);
+                                            System.out.println(veh.toString());
                                         }
                                      }
                             break;
                             case 3: for(Vehiculo veh:aa.getFlota()){
                                         if(veh instanceof Furgoneta){
                                         listado.add(veh);
+                                        System.out.println(veh.toString());
                                         }
                                      }
                             break;

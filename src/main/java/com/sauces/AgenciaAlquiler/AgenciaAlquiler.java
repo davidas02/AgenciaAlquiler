@@ -87,7 +87,7 @@ public class AgenciaAlquiler {
         
         while(iterador.hasNext()){
             vehiculo=iterador.next();
-            if(iterador.next().getMatricula().equals(matricula)){
+            if(vehiculo.getMatricula().equals(matricula)){
                return vehiculo;
              }
         }
