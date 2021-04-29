@@ -27,13 +27,18 @@ public class AppAgenciaAlquiler {
         int plazas;
         float capacidad;
         Vehiculo v=null;
+        VehiculoDao vehiculoDao=null;
+        String nombreArchivo;
+        String extension;
         List<Vehiculo> listado=null;
     do{
         System.out.println("1.- Añadir Vehiculo");
         System.out.println("2.- Consultar vehiculo");
         System.out.println("3.- Eliminar vehiculo");
         System.out.println("4.- Listado de vehículos");
-        System.out.println("5-  Consultar alquiler más barato");
+        System.out.println("5.- Consultar alquiler más barato");
+        System.out.println("6.- Guardar Vehiculos");
+        System.out.println("7.- Cargar Vehiculos");
         System.out.println("0- Salir");
         System.out.println("Introduzca opcion: ");
         opcion=teclado.nextInt();
@@ -118,6 +123,27 @@ public class AppAgenciaAlquiler {
                 break;
             case 5: System.out.println(aa.getVehiculoMasBarato());
                 break;
+            case 6:
+                System.out.println("Introduce nombre de archivo: ");
+                        nombreArchivo=teclado.nextLine();
+                        aa.setVehiculoDao(getDao(nombreArchivo));
+                        try {
+                            aa.guardarVehiculos();
+                        }catch (DaoException de) {
+                            System.out.println(de.getMessage());
+                        }                
+                        break;
+            case 7:
+                System.out.println("Introduce nombre de archivo: ");
+                        nombreArchivo=teclado.nextLine();
+                        aa.setVehiculoDao(getDao(nombreArchivo));
+                        try {
+                            aa.cargarVehiculos();
+                            System.out.println(aa.cargarVehiculos());
+                        }catch (DaoException de) {
+                            System.out.println(de.getMessage());
+                        }
+                        break;
             case 0: System.out.println("¡Adios!");
                 break;
             default: System.out.println("Error en la seleccion");
@@ -125,4 +151,18 @@ public class AppAgenciaAlquiler {
         }
     }while(opcion!=0);
         }
+     public static VehiculoDao getDao(String archivo){
+        String extension=archivo.substring(archivo.lastIndexOf(".")+1);
+        switch(extension){
+            case "obj":
+                return (new VehiculoDaoObj(archivo));
+            case "csv":
+                return (new VehiculoDaoCsv(archivo));
+            case "json":
+                return (new VehiculoDaoJson(archivo));
+            case "xml":
+                return (new VehiculoDaoXml(archivo));
+        }
+        return null;
+    }
 }

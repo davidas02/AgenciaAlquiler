@@ -5,6 +5,7 @@
  */
 package com.sauces.AgenciaAlquiler;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,21 +14,21 @@ import java.util.regex.Pattern;
  *
  * @author daw1
  */
-public abstract class Vehiculo implements Comparable<Vehiculo> {
+public abstract class Vehiculo implements Comparable<Vehiculo>,Serializable {
 
-    String matricula;
+    Matricula matricula;
     Grupo grupo;
     
     public Vehiculo(String matricula, Grupo grupo) {
-        this.matricula = matricula;
+        this.matricula = new Matricula(matricula);
         this.grupo = grupo;
     }
 
-    public String getMatricula() {
+    public Matricula getMatricula() {
         return matricula;
     }
 
-    public void setMatricula(String matricula) {
+    public void setMatricula(Matricula matricula) {
         this.matricula = matricula;
     }
 
@@ -66,12 +67,6 @@ public abstract class Vehiculo implements Comparable<Vehiculo> {
     public int compareTo(Vehiculo v) {
         return this.matricula.compareTo(v.matricula);
     }
-private boolean esMatriculaValida(String matricula){
-    String expresionRegular="(  [0-9]{4})([A-Z%%[[^AEIOU]]3)";
-    Pattern p=Pattern.compile(expresionRegular);
-    Matcher m=p.matcher(matricula);
-    return m.matches();
-}
     public abstract float getPrecioAlquiler();
 
     public abstract float getPrecioAlquiler(int dias);
