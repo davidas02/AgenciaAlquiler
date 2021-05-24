@@ -11,16 +11,17 @@ import com.sauces.Modelo.Turismo;
 import com.sauces.Modelo.Vehiculo;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
  * @author daw1
  */
-public class VehiculoTableModel {
+public class VehiculoTableModel extends AbstractTableModel{
     private List<Vehiculo> listadoVehiculos;
     private String[] columnas;
 
-    public VehiculoTableModel(List<Vehiculo> listadoVehiculos, String[] columnas) {
+    public VehiculoTableModel() {
         this.listadoVehiculos = new ArrayList<>();
         this.columnas = new String[]{"MATRÍCULA","TIPO","GRUPO","PLAZAS","CAPACIDAD","PRECIO ALQUILER"};
     }
@@ -56,16 +57,7 @@ public class VehiculoTableModel {
                     o=((Furgoneta)v).getClass();
                 }
             break;
-           case 2:o=if(){
-    }
-           break;
-           case 3:if(e instanceof EmpleadoFijo){
-                        o=0;
-                    }else{
-                            o=((EmpleadoEventual)e).getHoras();
-                            }
-           break;
-           case 4: o=e.ingresos();
+           
         }
         return o;
     }
