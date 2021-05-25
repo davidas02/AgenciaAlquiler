@@ -7,7 +7,9 @@ package com.sauces.Controlador;
 
 import com.sauces.Modelo.AgenciaAlquiler;
 import com.sauces.Modelo.DaoException;
+import com.sauces.Modelo.Furgoneta;
 import com.sauces.Modelo.Grupo;
+import com.sauces.Modelo.Turismo;
 import com.sauces.Modelo.Vehiculo;
 import com.sauces.Modelo.VehiculoDao;
 import com.sauces.Modelo.VehiculoDaoCsv;
@@ -26,21 +28,63 @@ public class Controlador {
     private Ventana vista;
     private AgenciaAlquiler agenciaAlquiler;
 
-    public Controlador(Ventana vista, AgenciaAlquiler agenciaAlquiler) {
+    public Controlador(AgenciaAlquiler agenciaAlquiler,Ventana vista) {
         this.vista = vista;
         this.agenciaAlquiler = agenciaAlquiler;
     }
 
     public void crearVehiculo() {
-
+        String matricula, grupo,tipo;
+        int plazas;
+        float capacidad;
+        Vehiculo v=null;
+        matricula=vista.getMatricula();
+        tipo=vista.getTipo();
+        grupo=vista.getGrupo();
+        if(tipo.equals("TURISMO")){
+            plazas=vista.getPlazas();
+        v=new Turismo(matricula,Grupo.valueOf(grupo),plazas);
+        }
+        if(tipo.equals("FURGONETA")){
+        capacidad=vista.getCapacidad();
+        v=new Furgoneta(matricula, Grupo.valueOf(grupo), capacidad);
+        }
     }
 
     public void borrarVehiculo() {
-
+        String matricula = vista.getMatricula();
+        Vehiculo v;
+        v = agenciaAlquiler.consultarVehiculo(matricula);
+        if (v != null) {
+            if (agenciaAlquiler.eliminarVehiculo(v)) {
+                vista.mostrarMensaje("Vehiculo Eliminado");
+            } else {
+                vista.mostrarMensaje("No se ha podido eliminar el vehiculo");
+            }
+        }else{
+            vista.mostrarMensaje("No existe el vehiculo");
+        }
     }
 
     public void buscarVehiculo() {
+        String matricula;
+        Vehiculo v;
 
+        matricula = vista.getMatricula();
+        v =agenciaAlquiler.consultarVehiculo(matricula) ;
+        if (matricula != null) {
+            vista.mostrarMatricula(v.getMatricula().toString());
+            if (v instanceof Turismo) {
+                vista.mostrarTipo("TURISMO");
+                vista.mostrarPrecioAlquiler(((Turismo) v).getPrecioAlquiler());
+            } else {
+                vista.mostrarTipo("Eventual");
+                vista.mostrarPrecioAlquiler((float) ((Furgoneta) v).getPrecioAlquiler());
+                
+            }
+        } else {
+            vista.mostrarMensaje("No existe empleado con ese DNI");
+        }
     }
 
     public void modificarVehiculo() {

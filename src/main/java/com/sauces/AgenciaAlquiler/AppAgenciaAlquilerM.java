@@ -19,12 +19,15 @@ public class AppAgenciaAlquilerM {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        // TODO code application logic here 
+        AgenciaAlquiler aa = new AgenciaAlquiler();
+        Ventana vista=new Ventana();
+      Controlador controlador=new Controlador(aa, vista);
+      vista.setControlador(controlador);
+        controlador.iniciar();
     }
         // TODO code application logic here
-          AgenciaAlquiler aa = new AgenciaAlquiler();
-        Ventana vista=new Ventana();
-        Controlador controlador=new Controlador(sn,vista);
-        vista.setControlador(controlador);
-        controlador.iniciar();
+       
+      
+        
 }
