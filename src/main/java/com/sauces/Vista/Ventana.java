@@ -397,6 +397,7 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_bMasCaroActionPerformed
     public String getMatricula(){
         return this.tMatricula.getText();
+        //
     }
     public String getGrupo(){
         return this.cbGrupo.toString();
