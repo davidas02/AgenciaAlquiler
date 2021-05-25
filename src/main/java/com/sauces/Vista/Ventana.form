@@ -268,6 +268,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="tCapacidad">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="bBorrar">
           <Properties>
@@ -321,11 +324,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="MOSTRAR VEH&#xcd;CULO M&#xc1;S BARATO"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bMasBaratoActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="bMasCaro">
               <Properties>
                 <Property name="text" type="java.lang.String" value="MOSTRAR VEH&#xcd;CULO M&#xc1;S CARO"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bMasCaroActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -335,6 +344,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="tPrecioDia">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

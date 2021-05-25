@@ -94,6 +94,8 @@ public class Ventana extends javax.swing.JFrame {
 
         lCapacidad.setText("CAPACIDAD");
 
+        tCapacidad.setEditable(false);
+
         bBorrar.setText("BORRAR");
 
         bModificar.setText("MODIFICAR");
@@ -101,8 +103,18 @@ public class Ventana extends javax.swing.JFrame {
         pOtrasOperaciones.setBorder(javax.swing.BorderFactory.createTitledBorder("Otras Operaciones"));
 
         bMasBarato.setText("MOSTRAR VEHÍCULO MÁS BARATO");
+        bMasBarato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bMasBaratoActionPerformed(evt);
+            }
+        });
 
         bMasCaro.setText("MOSTRAR VEHÍCULO MÁS CARO");
+        bMasCaro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bMasCaroActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pOtrasOperacionesLayout = new javax.swing.GroupLayout(pOtrasOperaciones);
         pOtrasOperaciones.setLayout(pOtrasOperacionesLayout);
@@ -128,6 +140,8 @@ public class Ventana extends javax.swing.JFrame {
         );
 
         lPrecioDia.setText("PRECIO POR DÍA");
+
+        tPrecioDia.setEditable(false);
 
         javax.swing.GroupLayout pDatosVehiculoLayout = new javax.swing.GroupLayout(pDatosVehiculo);
         pDatosVehiculo.setLayout(pDatosVehiculoLayout);
@@ -355,14 +369,9 @@ public class Ventana extends javax.swing.JFrame {
 
     private void miNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNuevoActionPerformed
         // TODO add your handling code here:
-        if (this.dialogoVehiculo.mostrar() == DialogoVehiculo.ACEPTAR) {
-            mostrarMatricula(dialogoVehiculo.getMatricula());
-            mostrarGrupo(dialogoVehiculo.getGrupo());
-            mostrarTipo(dialogoVehiculo.getTipo());
-            mostrarPlazas(dialogoVehiculo.getPlazas());
-            mostrarCapacidad(dialogoVehiculo.getCapacidad());
-            controlador.crearVehiculo();
-        }
+       if(this.dialogoVehiculo.mostrar()==DialogoVehiculo.ACEPTAR){
+           
+       }
     }//GEN-LAST:event_miNuevoActionPerformed
 
     private void miGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miGuardarActionPerformed
@@ -376,6 +385,16 @@ public class Ventana extends javax.swing.JFrame {
         // TODO add your handling code here:
         controlador.buscarVehiculo();
     }//GEN-LAST:event_miBuscarActionPerformed
+
+    private void bMasBaratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMasBaratoActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_bMasBaratoActionPerformed
+
+    private void bMasCaroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMasCaroActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_bMasCaroActionPerformed
     public String getMatricula(){
         return this.tMatricula.getText();
     }

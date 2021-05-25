@@ -57,7 +57,17 @@ public class VehiculoTableModel extends AbstractTableModel{
                     o=((Furgoneta)v).getClass();
                 }
             break;
-           
+           case 2:o=v.getGrupo();
+           break;
+           case 3: if(v instanceof Turismo){
+               o=((Turismo) v).getPlazas();
+           }
+           break;
+           case 4: if(v instanceof Furgoneta){
+                o=((Furgoneta)v).getCapacidad();
+           }
+           break;
+           case 5: o=v.getPrecioAlquiler();
         }
         return o;
     }
