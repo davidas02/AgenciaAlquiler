@@ -6,6 +6,7 @@
 package com.sauces.Vista;
 
 import com.sauces.Controlador.Controlador;
+import com.sauces.Modelo.AgenciaAlquiler;
 import com.sauces.Modelo.Vehiculo;
 import java.util.List;
 import javax.swing.JFileChooser;
@@ -16,7 +17,6 @@ import javax.swing.JOptionPane;
  * @author daw1
  */
 public class Ventana extends javax.swing.JFrame {
-
     private DialogoVehiculo dialogoVehiculo = new DialogoVehiculo(this, true);
     private Controlador controlador;
     private VehiculoTableModel vehiculoTM;
@@ -99,8 +99,18 @@ public class Ventana extends javax.swing.JFrame {
         tCapacidad.setEditable(false);
 
         bBorrar.setText("BORRAR");
+        bBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bBorrarActionPerformed(evt);
+            }
+        });
 
         bModificar.setText("MODIFICAR");
+        bModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bModificarActionPerformed(evt);
+            }
+        });
 
         pOtrasOperaciones.setBorder(javax.swing.BorderFactory.createTitledBorder("Otras Operaciones"));
 
@@ -380,7 +390,8 @@ public class Ventana extends javax.swing.JFrame {
             }else{
                 mostrarCapacidad(dialogoVehiculo.getCapacidad());}
             controlador.crearVehiculo();
-            tablaVehiculos.revalidate();
+            this.actualizarTabla();
+            dialogoVehiculo.limpiarCampos();
         }
     }//GEN-LAST:event_miNuevoActionPerformed
 
@@ -393,18 +404,29 @@ public class Ventana extends javax.swing.JFrame {
 
     private void miBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miBuscarActionPerformed
         // TODO add your handling code here:
-        controlador.buscarVehiculo();
+      
     }//GEN-LAST:event_miBuscarActionPerformed
 
     private void bMasBaratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMasBaratoActionPerformed
         // TODO add your handling code here:
-        controlador.buscarVehiculoMasBarato();
+       controlador.buscarVehiculoMasBarato();
     }//GEN-LAST:event_bMasBaratoActionPerformed
 
     private void bMasCaroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMasCaroActionPerformed
         // TODO add your handling code here:
         controlador.buscarVehiculoMasCaro();
     }//GEN-LAST:event_bMasCaroActionPerformed
+
+    private void bBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBorrarActionPerformed
+        // TODO add your handling code here:
+        
+        this.solicitarConfirmacion();
+        controlador.borrarVehiculo();
+    }//GEN-LAST:event_bBorrarActionPerformed
+
+    private void bModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bModificarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bModificarActionPerformed
     public String getMatricula() {
         return this.tMatricula.getText();
         //
@@ -482,16 +504,13 @@ public class Ventana extends javax.swing.JFrame {
         this.controlador = controlador;
     }
 
-    public void limpiarCampos() {
-        this.tMatricula.setText("");
-        this.tPrecioDia.setText("");
-    }
+    
 
     public void mostrar() {
         setVisible(true);
     }
 
-    public void actalizarTabla() {
+    public void actualizarTabla() {
         this.tablaVehiculos.revalidate();
     }
 

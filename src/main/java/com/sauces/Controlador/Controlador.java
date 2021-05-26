@@ -18,6 +18,7 @@ import com.sauces.Modelo.VehiculoDaoObj;
 import com.sauces.Modelo.VehiculoDaoXml;
 import com.sauces.Vista.Ventana;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -67,24 +68,11 @@ public class Controlador {
     }
 
     public void buscarVehiculo() {
-        String matricula;
+        String matricula=null;
         Vehiculo v;
-
-        matricula = vista.getMatricula();
-        v =agenciaAlquiler.consultarVehiculo(matricula) ;
-        if (matricula != null) {
-            vista.mostrarMatricula(v.getMatricula().toString());
-            if (v instanceof Turismo) {
-                vista.mostrarTipo("TURISMO");
-                vista.mostrarPrecioAlquiler(((Turismo) v).getPrecioAlquiler());
-            } else {
-                vista.mostrarTipo("FURGONETA");
-                vista.mostrarPrecioAlquiler((float) ((Furgoneta) v).getPrecioAlquiler());
-                
-            }
-        } else {
-            vista.mostrarMensaje("No existe empleado con ese DNI");
-        }
+        JOptionPane.showInputDialog(null,"Introduce Matricula",matricula);
+        v=agenciaAlquiler.consultarVehiculo(matricula);
+        vista.mostrarMensaje(v.toString());
     }
 
     public void modificarVehiculo() {
@@ -92,7 +80,7 @@ public class Controlador {
     }
 
     public void listarVehiculos() {
-
+        vista.listarVehiculos(agenciaAlquiler.getFlota());
     }
 
     public void guardarVehiculos() {
