@@ -41,11 +41,11 @@ public class Controlador {
         matricula=vista.getMatricula();
         tipo=vista.getTipo();
         grupo=vista.getGrupo();
-        if(tipo.equals("TURISMO")){
+        if(v instanceof Turismo){
             plazas=vista.getPlazas();
         v=new Turismo(matricula,Grupo.valueOf(grupo),plazas);
         }
-        if(tipo.equals("FURGONETA")){
+        if(v instanceof Furgoneta){
         capacidad=vista.getCapacidad();
         v=new Furgoneta(matricula, Grupo.valueOf(grupo), capacidad);
         }

@@ -16,9 +16,11 @@ import javax.swing.JOptionPane;
  * @author daw1
  */
 public class Ventana extends javax.swing.JFrame {
-    private DialogoVehiculo dialogoVehiculo;
+
+    private DialogoVehiculo dialogoVehiculo = new DialogoVehiculo(this, true);
     private Controlador controlador;
     private VehiculoTableModel vehiculoTM;
+
     /**
      * Creates new form Ventana
      */
@@ -362,21 +364,29 @@ public class Ventana extends javax.swing.JFrame {
 
     private void miAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAbrirActionPerformed
         // TODO add your handling code here:
-        if(selectorFicheros.showOpenDialog(this)==JFileChooser.APPROVE_OPTION){
+        if (selectorFicheros.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             controlador.cargarVehiculos();
         }
     }//GEN-LAST:event_miAbrirActionPerformed
 
     private void miNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNuevoActionPerformed
         // TODO add your handling code here:
-       if(this.dialogoVehiculo.mostrar()==DialogoVehiculo.ACEPTAR){
-           
-       }
+        if (dialogoVehiculo.mostrar() == DialogoVehiculo.ACEPTAR) {
+            mostrarMatricula(dialogoVehiculo.getMatricula());
+            mostrarGrupo(dialogoVehiculo.getGrupo());
+            mostrarTipo(dialogoVehiculo.getTipo());
+            if(cbTipo.getSelectedItem().equals("TURISMO")){
+                mostrarPlazas(dialogoVehiculo.getPlazas());
+            }else{
+                mostrarCapacidad(dialogoVehiculo.getCapacidad());}
+            controlador.crearVehiculo();
+            tablaVehiculos.revalidate();
+        }
     }//GEN-LAST:event_miNuevoActionPerformed
 
     private void miGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miGuardarActionPerformed
         // TODO add your handling code here:
-        if(selectorFicheros.showSaveDialog(this)==JFileChooser.APPROVE_OPTION){
+        if (selectorFicheros.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
             controlador.guardarVehiculos();
         }
     }//GEN-LAST:event_miGuardarActionPerformed
@@ -388,70 +398,86 @@ public class Ventana extends javax.swing.JFrame {
 
     private void bMasBaratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMasBaratoActionPerformed
         // TODO add your handling code here:
-       
+        controlador.buscarVehiculoMasBarato();
     }//GEN-LAST:event_bMasBaratoActionPerformed
 
     private void bMasCaroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMasCaroActionPerformed
         // TODO add your handling code here:
-       
+        controlador.buscarVehiculoMasCaro();
     }//GEN-LAST:event_bMasCaroActionPerformed
-    public String getMatricula(){
+    public String getMatricula() {
         return this.tMatricula.getText();
         //
     }
-    public String getGrupo(){
+
+    public String getGrupo() {
         return this.cbGrupo.toString();
     }
-    public String getTipo(){
+
+    public String getTipo() {
         return this.cbTipo.toString();
-     }
-    public int getPlazas(){
-       return (int) spPlazas.getValue();
     }
-    public float getCapacidad(){
-       return((Number)this.tCapacidad.getValue()).floatValue();
+
+    public int getPlazas() {
+        return (int) spPlazas.getValue();
     }
+
+    public float getCapacidad() {
+        return ((Number) this.tCapacidad.getValue()).floatValue();
+    }
+
     public String getArchivo() {
         return selectorFicheros.getSelectedFile().getAbsolutePath();
     }
-    public String getOrden(){
-         return bgOrdenListado.getSelection().getActionCommand();
+
+    public String getOrden() {
+        return bgOrdenListado.getSelection().getActionCommand();
     }
+
     /*public String getFiltroGrupo(){
     }
     public String getFiltroTipo(){
     }*/
-    public void mostrarMatricula(String matricula){
-    this.tMatricula.setText(matricula);
+    public void mostrarMatricula(String matricula) {
+        this.tMatricula.setText(matricula);
     }
-    public void mostrarTipo(String tipo){
-    this.cbTipo.setSelectedItem(tipo);
+
+    public void mostrarTipo(String tipo) {
+        this.cbTipo.setSelectedItem(tipo);
     }
-    public void mostrarGrupo(String grupo){
-    this.cbGrupo.setSelectedItem(grupo);
+
+    public void mostrarGrupo(String grupo) {
+        this.cbGrupo.setSelectedItem(grupo);
     }
-    public void mostrarPlazas(int plazas){
+
+    public void mostrarPlazas(int plazas) {
         this.spPlazas.setValue(plazas);
     }
-    public void mostrarCapacidad(float capacidad){
-    this.tCapacidad.setText(Float.toString(capacidad));
+
+    public void mostrarCapacidad(float capacidad) {
+        this.tCapacidad.setText(Float.toString(capacidad));
     }
-    public void mostrarPrecioAlquiler(float precio){
-    this.tPrecioDia.setText(Float.toString(precio));
+
+    public void mostrarPrecioAlquiler(float precio) {
+        this.tPrecioDia.setText(Float.toString(precio));
     }
-    public void listarVehiculos(List<Vehiculo> listado){
-    vehiculoTM.setListadoVehiculos(listado);
+
+    public void listarVehiculos(List<Vehiculo> listado) {
+        vehiculoTM.setListadoVehiculos(listado);
         tablaVehiculos.revalidate();
     }
+
     public void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje);
     }
-    public boolean solicitarConfirmacion(){
-    if(JOptionPane.showConfirmDialog(this, "¿Estás seguro de Borrar? Será permanente")==JOptionPane.OK_OPTION){
+
+    public boolean solicitarConfirmacion() {
+        if (JOptionPane.showConfirmDialog(this, "¿Estás seguro de Borrar? Será permanente") == JOptionPane.OK_OPTION) {
             return true;
         }
         return false;
     }
+
     public void setControlador(Controlador controlador) {
         this.controlador = controlador;
     }
@@ -460,12 +486,15 @@ public class Ventana extends javax.swing.JFrame {
         this.tMatricula.setText("");
         this.tPrecioDia.setText("");
     }
+
     public void mostrar() {
         setVisible(true);
     }
-     public void actalizarTabla(){
-         this.tablaVehiculos.revalidate();
-     }  
+
+    public void actalizarTabla() {
+        this.tablaVehiculos.revalidate();
+    }
+
     /**
      * @param args the command line arguments
      */

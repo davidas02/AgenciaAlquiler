@@ -63,6 +63,11 @@ public class DialogoVehiculo extends javax.swing.JDialog {
         lTipo.setText("TIPO");
 
         cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TURISMO", "FURGONETA" }));
+        cbTipo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbTipoItemStateChanged(evt);
+            }
+        });
 
         lCapacidad.setText("CAPACIDAD");
 
@@ -185,6 +190,22 @@ public class DialogoVehiculo extends javax.swing.JDialog {
         opcion=CANCELAR;
         setVisible(false);
     }//GEN-LAST:event_bCancelarActionPerformed
+
+    private void cbTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbTipoItemStateChanged
+        // TODO add your handling code here:
+        if(evt.getItem().equals("TURISMO")){
+            lCapacidad.setVisible(false);
+            tCapacidad.setVisible(false);
+            lPlazas.setVisible(true);
+            spPlazas.setVisible(true);
+        }else{
+            lCapacidad.setVisible(true);
+            tCapacidad.setVisible(true);
+            lPlazas.setVisible(false);
+            spPlazas.setVisible(false);
+        }
+         
+    }//GEN-LAST:event_cbTipoItemStateChanged
     public String getMatricula(){
         return this.tMatricula.getText().toString();
     }
