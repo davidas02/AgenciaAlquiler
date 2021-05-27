@@ -446,6 +446,7 @@
                 </Property>
               </Properties>
               <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="tablaVehiculos.getSelectionModel().addListSelectionListener(new ListSelectionListener(){&#xa;            public void valueChanged(ListSelectionEvent lse){&#xa;                int fila=tablaVehiculos.getSelectedRow();&#xa;                if(fila&gt;=0){&#xa;                    tMatricula.setText(tablaVehiculos.getValueAt(fila,0).toString());&#xa;                    cbTipo.setSelectedItem(tablaVehiculos.getValueAt(fila,1));&#xa;                    cbGrupo.setSelectedItem(tablaVehiculos.getValueAt(fila,2));&#xa;                    spPlazas.setValue(tablaVehiculos.getValueAt(fila, 3));&#xa;                    tCapacidad.setValue(tablaVehiculos.getValueAt(fila, 4));&#xa;                    tPrecioDia.setText(tablaVehiculos.getValueAt(fila, 5).toString());&#xa;                }&#xa;            }&#xa;        });"/>
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="vehiculoTM=new VehiculoTableModel();"/>
               </AuxValues>
             </Component>

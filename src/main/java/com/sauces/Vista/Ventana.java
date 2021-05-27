@@ -11,6 +11,8 @@ import com.sauces.Modelo.Vehiculo;
 import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -237,6 +239,19 @@ public class Ventana extends javax.swing.JFrame {
 
         vehiculoTM=new VehiculoTableModel();
         tablaVehiculos.setModel(vehiculoTM);
+        tablaVehiculos.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+            public void valueChanged(ListSelectionEvent lse){
+                int fila=tablaVehiculos.getSelectedRow();
+                if(fila>=0){
+                    tMatricula.setText(tablaVehiculos.getValueAt(fila,0).toString());
+                    cbTipo.setSelectedItem(tablaVehiculos.getValueAt(fila,1));
+                    cbGrupo.setSelectedItem(tablaVehiculos.getValueAt(fila,2));
+                    spPlazas.setValue(tablaVehiculos.getValueAt(fila, 3));
+                    tCapacidad.setValue(tablaVehiculos.getValueAt(fila, 4));
+                    tPrecioDia.setText(tablaVehiculos.getValueAt(fila, 5).toString());
+                }
+            }
+        });
         jScrollPane1.setViewportView(tablaVehiculos);
 
         lOrdenListado.setText("ORDEN DEL LISTADO");
