@@ -6,6 +6,7 @@
 package com.sauces.Controlador;
 
 import com.sauces.Modelo.AgenciaAlquiler;
+import com.sauces.Modelo.ComparadorPrecio;
 import com.sauces.Modelo.DaoException;
 import com.sauces.Modelo.Furgoneta;
 import com.sauces.Modelo.Grupo;
@@ -79,7 +80,7 @@ public class Controlador {
     public void buscarVehiculo() {
         String matricula=null;
         Vehiculo v;
-        matricula=vista.getMatricula();
+        matricula=vista.getMatricula().toString();
         v=agenciaAlquiler.consultarVehiculo(matricula);
         if(v!=null){
             vista.mostrarMensaje(v.toString());
@@ -105,7 +106,7 @@ public class Controlador {
         }
         }
         Collections.sort(listado);
-        vista.listarVehiculos(listado);
+         vista.listarVehiculos(listado);
     }
 
     public void guardarVehiculos() {
@@ -120,7 +121,7 @@ public class Controlador {
             try {
                 agenciaAlquiler.setVehiculoDao(vehiculoDao);
                 n = agenciaAlquiler.guardarVehiculos();
-                vista.mostrarMensaje("se ha guardado " + n + " Empleados");
+                vista.mostrarMensaje("se ha guardado " + n + " Vehiculos");
             } catch (DaoException ex) {
                 vista.mostrarMensaje(ex.getMessage());
             }
@@ -152,7 +153,8 @@ public class Controlador {
     }
 
     public void buscarVehiculoMasCaro() {
-        vista.mostrarMensaje(agenciaAlquiler.listarVehiculosPorPrecio().toString());
+       Vehiculo v= Collections.max(agenciaAlquiler.getFlota(), new ComparadorPrecio());
+        vista.mostrarMensaje(v.toString());
     }
 
     public void iniciar() {

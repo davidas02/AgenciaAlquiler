@@ -26,7 +26,7 @@ public class Turismo extends Vehiculo {
 
     @Override
     public String toString() {
-        return super.toString()+" , "+ plazas;
+        return super.toString()+","+ plazas;
     }
     public float getPrecioAlquiler(){
     float precioAlquiler=0;

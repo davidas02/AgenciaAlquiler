@@ -27,7 +27,7 @@ public class Furgoneta extends Vehiculo {
 
     @Override
     public String toString() {
-        return super.toString()+" "+ capacidad ;
+        return super.toString()+","+ capacidad ;
     }
 public float getPrecioAlquiler(){
     float precioAlquiler=0;

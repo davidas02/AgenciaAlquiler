@@ -9,6 +9,7 @@ import com.sauces.Controlador.Controlador;
 import com.sauces.Modelo.AgenciaAlquiler;
 import com.sauces.Modelo.Vehiculo;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -253,6 +254,11 @@ public class Ventana extends javax.swing.JFrame {
 
         bgOrdenListado.add(bMatricula);
         bMatricula.setText("MATRÍCULA");
+        bMatricula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bMatriculaActionPerformed(evt);
+            }
+        });
 
         bgOrdenListado.add(bPrecioAlquiler);
         bPrecioAlquiler.setText("PRECIO ALQUILER");
@@ -448,6 +454,11 @@ public class Ventana extends javax.swing.JFrame {
         // TODO add your handling code here:
         controlador.listarVehiculos();
     }//GEN-LAST:event_bListarVehiculosActionPerformed
+
+    private void bMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMatriculaActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_bMatriculaActionPerformed
     public String getMatricula() {
         return this.tMatricula.getText();
         //

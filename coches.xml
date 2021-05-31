@@ -1,0 +1,30 @@
+<list>
+  <com.sauces.Modelo.Turismo>
+    <matricula>
+      <matricula>0319CRY</matricula>
+    </matricula>
+    <grupo>B</grupo>
+    <plazas>5</plazas>
+  </com.sauces.Modelo.Turismo>
+  <com.sauces.Modelo.Turismo>
+    <matricula>
+      <matricula>8878HMR</matricula>
+    </matricula>
+    <grupo>A</grupo>
+    <plazas>5</plazas>
+  </com.sauces.Modelo.Turismo>
+  <com.sauces.Modelo.Turismo>
+    <matricula>
+      <matricula>2978DRF</matricula>
+    </matricula>
+    <grupo>C</grupo>
+    <plazas>7</plazas>
+  </com.sauces.Modelo.Turismo>
+  <com.sauces.Modelo.Furgoneta>
+    <matricula>
+      <matricula>8850DVL</matricula>
+    </matricula>
+    <grupo>C</grupo>
+    <capacidad>15.0</capacidad>
+  </com.sauces.Modelo.Furgoneta>
+</list>
