@@ -65,7 +65,7 @@ public class AgenciaAlquiler {
         
         while(iterador.hasNext()){
             vehiculo=iterador.next();
-            if(vehiculo.getMatricula().equals(matricula)){
+            if(vehiculo.getMatricula().toString().equals(matricula)){
                return vehiculo;
              }
         }
@@ -107,7 +107,7 @@ public class AgenciaAlquiler {
         if(vehiculoDao!=null){
             List<Vehiculo> listado=vehiculoDao.listar();
             for(Vehiculo v:listado){
-                if(this.incluirVehiculo(v));
+                if(this.incluirVehiculo(v))
                 n++;
             }
         }

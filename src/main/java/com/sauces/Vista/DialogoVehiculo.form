@@ -83,15 +83,13 @@
                                               <Component id="cbTipo" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Component id="tMatricula" min="-2" pref="117" max="-2" attributes="0"/>
+                                          <Component id="tCapacidad" alignment="0" min="-2" pref="88" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="spPlazas" min="-2" max="-2" attributes="0"/>
-                                      <Component id="tCapacidad" min="-2" pref="67" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="spPlazas" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -129,7 +127,7 @@
                       <Component id="lPlazas" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="spPlazas" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="32" max="32767" attributes="0"/>
+                  <EmptySpace pref="28" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="bAceptar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="bCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -195,13 +193,6 @@
             <Property name="text" type="java.lang.String" value="CAPACIDAD"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="tCapacidad">
-          <Properties>
-            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-              <Format format="#0.00" subtype="-1" type="0"/>
-            </Property>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JButton" name="bAceptar">
           <Properties>
             <Property name="text" type="java.lang.String" value="ACEPTAR"/>
@@ -224,6 +215,8 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JSpinner" name="spPlazas">
+        </Component>
+        <Component class="javax.swing.JTextField" name="tCapacidad">
         </Component>
       </SubComponents>
     </Container>

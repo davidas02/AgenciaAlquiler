@@ -147,14 +147,14 @@
                               </Group>
                               <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="lPrecioDia" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lCapacidad" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="tPrecioDia" max="32767" attributes="0"/>
+                                      <Component id="tCapacidad" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="lCapacidad" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="tCapacidad" min="-2" pref="126" max="-2" attributes="0"/>
+                                      <Component id="lPrecioDia" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="tPrecioDia" min="-2" pref="95" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -190,7 +190,7 @@
                       <Component id="lCapacidad" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="tCapacidad" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lPrecioDia" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="tPrecioDia" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -202,7 +202,7 @@
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="pOtrasOperaciones" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="38" max="32767" attributes="0"/>
+                  <EmptySpace pref="36" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -265,11 +265,6 @@
         <Component class="javax.swing.JLabel" name="lCapacidad">
           <Properties>
             <Property name="text" type="java.lang.String" value="CAPACIDAD"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JFormattedTextField" name="tCapacidad">
-          <Properties>
-            <Property name="editable" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="bBorrar">
@@ -354,6 +349,8 @@
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JTextField" name="tCapacidad">
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="pListado">
@@ -431,6 +428,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="LISTAR VEH&#xcd;CULOS"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bListarVehiculosActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
@@ -446,7 +446,6 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="tablaVehiculos.getSelectionModel().addListSelectionListener(new ListSelectionListener(){&#xa;            public void valueChanged(ListSelectionEvent lse){&#xa;                int fila=tablaVehiculos.getSelectedRow();&#xa;                if(fila&gt;=0){&#xa;                    tMatricula.setText(tablaVehiculos.getValueAt(fila,0).toString());&#xa;                    cbTipo.setSelectedItem(tablaVehiculos.getValueAt(fila,1));&#xa;                    cbGrupo.setSelectedItem(tablaVehiculos.getValueAt(fila,2));&#xa;                    spPlazas.setValue(tablaVehiculos.getValueAt(fila, 3));&#xa;                    tCapacidad.setValue(tablaVehiculos.getValueAt(fila, 4));&#xa;                    tPrecioDia.setText(tablaVehiculos.getValueAt(fila, 5).toString());&#xa;                }&#xa;            }&#xa;        });"/>
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="vehiculoTM=new VehiculoTableModel();"/>
               </AuxValues>
             </Component>

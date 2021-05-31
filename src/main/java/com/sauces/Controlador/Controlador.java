@@ -17,8 +17,9 @@ import com.sauces.Modelo.VehiculoDaoJson;
 import com.sauces.Modelo.VehiculoDaoObj;
 import com.sauces.Modelo.VehiculoDaoXml;
 import com.sauces.Vista.Ventana;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -35,20 +36,28 @@ public class Controlador {
     }
 
     public void crearVehiculo() {
-        String matricula, grupo,tipo;
-        int plazas;
-        float capacidad;
         Vehiculo v=null;
-        matricula=vista.getMatricula();
-        tipo=vista.getTipo();
-        grupo=vista.getGrupo();
-        if(v instanceof Turismo){
-            plazas=vista.getPlazas();
-        v=new Turismo(matricula,Grupo.valueOf(grupo),plazas);
+        String matricula=vista.getMatricula();
+        Grupo grupo=Grupo.valueOf(vista.getGrupo());
+        String tipo=vista.getTipo();
+        
+        if(tipo.equals("TURISMO")){
+            
+                int plazas=vista.getPlazas();
+                v=new Turismo(matricula,grupo,plazas);
+        }    
+        else{
+                float capacidad=vista.getCapacidad();
+                v=new Furgoneta(matricula,grupo,capacidad);
+            
         }
-        if(v instanceof Furgoneta){
-        capacidad=vista.getCapacidad();
-        v=new Furgoneta(matricula, Grupo.valueOf(grupo), capacidad);
+        vista.actualizarTabla();
+        if(agenciaAlquiler.incluirVehiculo(v)){
+            vista.mostrarPrecioAlquiler(v.getPrecioAlquiler());
+            vista.mostrarMensaje("Vehículo incluido");
+        }
+        else{
+            vista.mostrarMensaje("No se ha podido incluir el vehículo");
         }
     }
 
@@ -70,17 +79,33 @@ public class Controlador {
     public void buscarVehiculo() {
         String matricula=null;
         Vehiculo v;
-        JOptionPane.showInputDialog(null,"Introduce Matricula",matricula);
+        matricula=vista.getMatricula();
         v=agenciaAlquiler.consultarVehiculo(matricula);
-        vista.mostrarMensaje(v.toString());
+        if(v!=null){
+            vista.mostrarMensaje(v.toString());
+        }else{
+        vista.mostrarMensaje("Vehiculo no encontrado");
+        }
+              
     }
 
     public void modificarVehiculo() {
-
+       
     }
 
     public void listarVehiculos() {
-        vista.listarVehiculos(agenciaAlquiler.getFlota());
+       List<Vehiculo> listado=new ArrayList<>();
+        for(Vehiculo v:agenciaAlquiler.getFlota()){
+        String grupo=vista.getFiltroGrupo();
+        String tipo=vista.getFiltroTipo();
+        if(tipo.equals("TODOS") || v.getClass().getSimpleName().toUpperCase().equals(tipo)){
+            if(grupo.equals("TODOS")||v.getGrupo().equals(Grupo.valueOf(grupo))){
+            listado.add(v);
+            }
+        }
+        }
+        Collections.sort(listado);
+        vista.listarVehiculos(listado);
     }
 
     public void guardarVehiculos() {
@@ -115,7 +140,7 @@ public class Controlador {
                agenciaAlquiler.setVehiculoDao(vehiculoDao);
                 n =agenciaAlquiler.cargarVehiculos();
 
-                vista.mostrarMensaje("se ha cargado " + n + " Empleados");
+                vista.mostrarMensaje("Se han cargado " + n + " Vehiculos");
             } catch (DaoException ex) {
                 vista.mostrarMensaje(ex.getMessage());
             }

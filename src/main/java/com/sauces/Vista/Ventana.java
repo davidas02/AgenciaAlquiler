@@ -8,6 +8,7 @@ package com.sauces.Vista;
 import com.sauces.Controlador.Controlador;
 import com.sauces.Modelo.AgenciaAlquiler;
 import com.sauces.Modelo.Vehiculo;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -51,7 +52,6 @@ public class Ventana extends javax.swing.JFrame {
         lPlazas = new javax.swing.JLabel();
         spPlazas = new javax.swing.JSpinner();
         lCapacidad = new javax.swing.JLabel();
-        tCapacidad = new javax.swing.JFormattedTextField();
         bBorrar = new javax.swing.JButton();
         bModificar = new javax.swing.JButton();
         pOtrasOperaciones = new javax.swing.JPanel();
@@ -59,6 +59,7 @@ public class Ventana extends javax.swing.JFrame {
         bMasCaro = new javax.swing.JButton();
         lPrecioDia = new javax.swing.JLabel();
         tPrecioDia = new javax.swing.JFormattedTextField();
+        tCapacidad = new javax.swing.JTextField();
         pListado = new javax.swing.JPanel();
         bListarVehiculos = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -97,8 +98,6 @@ public class Ventana extends javax.swing.JFrame {
         lPlazas.setText("PLAZAS");
 
         lCapacidad.setText("CAPACIDAD");
-
-        tCapacidad.setEditable(false);
 
         bBorrar.setText("BORRAR");
         bBorrar.addActionListener(new java.awt.event.ActionListener() {
@@ -189,13 +188,13 @@ public class Ventana extends javax.swing.JFrame {
                                 .addComponent(spPlazas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pDatosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pDatosVehiculoLayout.createSequentialGroup()
+                                    .addComponent(lCapacidad)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(tCapacidad))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pDatosVehiculoLayout.createSequentialGroup()
                                     .addComponent(lPrecioDia)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(tPrecioDia))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pDatosVehiculoLayout.createSequentialGroup()
-                                    .addComponent(lCapacidad)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(tCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(tPrecioDia, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -220,7 +219,7 @@ public class Ventana extends javax.swing.JFrame {
                 .addGroup(pDatosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lCapacidad)
                     .addComponent(tCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                .addGap(28, 28, 28)
                 .addGroup(pDatosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lPrecioDia)
                     .addComponent(tPrecioDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -230,28 +229,20 @@ public class Ventana extends javax.swing.JFrame {
                     .addComponent(bModificar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pOtrasOperaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pListado.setBorder(javax.swing.BorderFactory.createTitledBorder("Listado de vehículos"));
 
         bListarVehiculos.setText("LISTAR VEHÍCULOS");
+        bListarVehiculos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bListarVehiculosActionPerformed(evt);
+            }
+        });
 
         vehiculoTM=new VehiculoTableModel();
         tablaVehiculos.setModel(vehiculoTM);
-        tablaVehiculos.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-            public void valueChanged(ListSelectionEvent lse){
-                int fila=tablaVehiculos.getSelectedRow();
-                if(fila>=0){
-                    tMatricula.setText(tablaVehiculos.getValueAt(fila,0).toString());
-                    cbTipo.setSelectedItem(tablaVehiculos.getValueAt(fila,1));
-                    cbGrupo.setSelectedItem(tablaVehiculos.getValueAt(fila,2));
-                    spPlazas.setValue(tablaVehiculos.getValueAt(fila, 3));
-                    tCapacidad.setValue(tablaVehiculos.getValueAt(fila, 4));
-                    tPrecioDia.setText(tablaVehiculos.getValueAt(fila, 5).toString());
-                }
-            }
-        });
         jScrollPane1.setViewportView(tablaVehiculos);
 
         lOrdenListado.setText("ORDEN DEL LISTADO");
@@ -419,7 +410,14 @@ public class Ventana extends javax.swing.JFrame {
 
     private void miBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miBuscarActionPerformed
         // TODO add your handling code here:
-      
+        String matricula;
+        
+       matricula=JOptionPane.showInputDialog(this,"Introduce Matricula");
+       if(matricula!=null){
+           this.mostrarMatricula(matricula);
+        controlador.buscarVehiculo();   
+       }
+        
     }//GEN-LAST:event_miBuscarActionPerformed
 
     private void bMasBaratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMasBaratoActionPerformed
@@ -434,25 +432,33 @@ public class Ventana extends javax.swing.JFrame {
 
     private void bBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBorrarActionPerformed
         // TODO add your handling code here:
-        
+        String matricula;
+        matricula=JOptionPane.showInputDialog(this,"Introduce Matricula");
+        if(matricula!=null){
         this.solicitarConfirmacion();
         controlador.borrarVehiculo();
+        }
     }//GEN-LAST:event_bBorrarActionPerformed
 
     private void bModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bModificarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bModificarActionPerformed
+
+    private void bListarVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bListarVehiculosActionPerformed
+        // TODO add your handling code here:
+        controlador.listarVehiculos();
+    }//GEN-LAST:event_bListarVehiculosActionPerformed
     public String getMatricula() {
         return this.tMatricula.getText();
         //
     }
 
     public String getGrupo() {
-        return this.cbGrupo.toString();
+        return this.cbGrupo.getSelectedItem().toString();
     }
 
     public String getTipo() {
-        return this.cbTipo.toString();
+        return this.cbTipo.getSelectedItem().toString();
     }
 
     public int getPlazas() {
@@ -460,7 +466,7 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     public float getCapacidad() {
-        return ((Number) this.tCapacidad.getValue()).floatValue();
+        return (Float.parseFloat(this.tCapacidad.getText()));
     }
 
     public String getArchivo() {
@@ -471,10 +477,13 @@ public class Ventana extends javax.swing.JFrame {
         return bgOrdenListado.getSelection().getActionCommand();
     }
 
-    /*public String getFiltroGrupo(){
+    public String getFiltroGrupo(){
+        
+        return this.cbFiltrarGrupo.getSelectedItem().toString();
     }
     public String getFiltroTipo(){
-    }*/
+        return this.cbFiltrarTipo.getSelectedItem().toString();
+    }
     public void mostrarMatricula(String matricula) {
         this.tMatricula.setText(matricula);
     }
@@ -599,7 +608,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JPanel pOtrasOperaciones;
     private javax.swing.JFileChooser selectorFicheros;
     private javax.swing.JSpinner spPlazas;
-    private javax.swing.JFormattedTextField tCapacidad;
+    private javax.swing.JTextField tCapacidad;
     private javax.swing.JTextField tMatricula;
     private javax.swing.JFormattedTextField tPrecioDia;
     private javax.swing.JTable tablaVehiculos;

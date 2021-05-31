@@ -39,12 +39,12 @@ Path path;
             matricula=tokens[1];
             grupo=tokens[2];
             switch (tipo){
-                case"turismo":
-                    plazas=Integer.parseInt(tokens[4]);
+                case"Turismo":
+                    plazas=Integer.parseInt(tokens[3]);
                     vehiculo= new Turismo(matricula, Grupo.valueOf(grupo), plazas);
                     break;
-                    case"furgoneta":
-                        capacidad=Float.parseFloat(tokens[4]);
+                    case"Furgoneta":
+                        capacidad=Float.parseFloat(tokens[3]);
                         vehiculo=new Furgoneta(matricula,Grupo.valueOf(grupo), capacidad);
                         break;
             }

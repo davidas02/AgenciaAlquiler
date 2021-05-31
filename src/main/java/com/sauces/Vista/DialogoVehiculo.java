@@ -38,11 +38,11 @@ public class DialogoVehiculo extends javax.swing.JDialog {
         lTipo = new javax.swing.JLabel();
         cbTipo = new javax.swing.JComboBox<>();
         lCapacidad = new javax.swing.JLabel();
-        tCapacidad = new javax.swing.JFormattedTextField();
         bAceptar = new javax.swing.JButton();
         bCancelar = new javax.swing.JButton();
         lPlazas = new javax.swing.JLabel();
         spPlazas = new javax.swing.JSpinner();
+        tCapacidad = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -70,8 +70,6 @@ public class DialogoVehiculo extends javax.swing.JDialog {
         });
 
         lCapacidad.setText("CAPACIDAD");
-
-        tCapacidad.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
         bAceptar.setText("ACEPTAR");
         bAceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -117,12 +115,11 @@ public class DialogoVehiculo extends javax.swing.JDialog {
                                             .addComponent(lTipo)
                                             .addGap(18, 18, 18)
                                             .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(tMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(tMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(tCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(49, 49, 49)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(spPlazas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(spPlazas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(bAceptar)))
         );
         jPanel1Layout.setVerticalGroup(
@@ -148,7 +145,7 @@ public class DialogoVehiculo extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lPlazas)
                     .addComponent(spPlazas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bAceptar)
                     .addComponent(bCancelar))
@@ -210,13 +207,13 @@ public class DialogoVehiculo extends javax.swing.JDialog {
         return this.tMatricula.getText().toString();
     }
     public String getGrupo(){
-        return this.cbGrupo.toString();
+        return this.cbGrupo.getSelectedItem().toString();
     }
     public int getPlazas(){
         return (int)spPlazas.getValue();
     }
     public String getTipo(){
-        return this.cbTipo.toString();
+        return this.cbTipo.getSelectedItem().toString();
     }
     public float getCapacidad(){
         return Float.parseFloat(this.tCapacidad.getText());
@@ -285,7 +282,7 @@ public class DialogoVehiculo extends javax.swing.JDialog {
     private javax.swing.JLabel lPlazas;
     private javax.swing.JLabel lTipo;
     private javax.swing.JSpinner spPlazas;
-    private javax.swing.JFormattedTextField tCapacidad;
+    private javax.swing.JTextField tCapacidad;
     private javax.swing.JTextField tMatricula;
     // End of variables declaration//GEN-END:variables
 }

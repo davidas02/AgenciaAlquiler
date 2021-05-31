@@ -16,8 +16,8 @@ import java.util.regex.Pattern;
  */
 public abstract class Vehiculo implements Comparable<Vehiculo>,Serializable {
 
-    Matricula matricula;
-    Grupo grupo;
+    private Matricula matricula;
+    private Grupo grupo;
     
     public Vehiculo(String matricula, Grupo grupo) {
         this.matricula = new Matricula(matricula);
