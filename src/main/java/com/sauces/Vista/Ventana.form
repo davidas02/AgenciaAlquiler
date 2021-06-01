@@ -3,6 +3,11 @@
 <Form version="1.4" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
     <Component class="javax.swing.JFileChooser" name="selectorFicheros">
+      <Properties>
+        <Property name="currentDirectory" type="java.io.File" editor="org.netbeans.beaninfo.editors.FileEditor">
+          <SerializedValue value="-84,-19,0,5,115,114,0,12,106,97,118,97,46,105,111,46,70,105,108,101,4,45,-92,69,14,13,-28,-1,3,0,1,76,0,4,112,97,116,104,116,0,18,76,106,97,118,97,47,108,97,110,103,47,83,116,114,105,110,103,59,120,112,116,0,32,68,58,92,80,114,111,103,114,97,109,97,99,105,-61,-77,110,92,65,103,101,110,99,105,97,65,108,113,117,105,108,101,114,119,2,0,92,120"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.ButtonGroup" name="bgOrdenListado">
     </Component>
@@ -446,6 +451,7 @@
                 </Property>
               </Properties>
               <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="tablaVehiculos.getSelectionModel().addListSelectionListener(new ListSelectionListener(){&#xa;           public void valueChanged(ListSelectionEvent lse){&#xa;                vehiculoSeleccionado(lse);&#xa;            }&#xa;        });"/>
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="vehiculoTM=new VehiculoTableModel();"/>
               </AuxValues>
             </Component>

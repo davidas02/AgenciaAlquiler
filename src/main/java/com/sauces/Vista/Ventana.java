@@ -21,6 +21,7 @@ import javax.swing.event.ListSelectionListener;
  * @author daw1
  */
 public class Ventana extends javax.swing.JFrame {
+
     private DialogoVehiculo dialogoVehiculo = new DialogoVehiculo(this, true);
     private Controlador controlador;
     private VehiculoTableModel vehiculoTM;
@@ -79,6 +80,8 @@ public class Ventana extends javax.swing.JFrame {
         miVehiculo = new javax.swing.JMenu();
         miNuevo = new javax.swing.JMenuItem();
         miBuscar = new javax.swing.JMenuItem();
+
+        selectorFicheros.setCurrentDirectory(new java.io.File("D:\\Programación\\AgenciaAlquiler"));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -244,6 +247,11 @@ public class Ventana extends javax.swing.JFrame {
 
         vehiculoTM=new VehiculoTableModel();
         tablaVehiculos.setModel(vehiculoTM);
+        tablaVehiculos.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+            public void valueChanged(ListSelectionEvent lse){
+                vehiculoSeleccionado(lse);
+            }
+        });
         jScrollPane1.setViewportView(tablaVehiculos);
 
         lOrdenListado.setText("ORDEN DEL LISTADO");
@@ -397,10 +405,11 @@ public class Ventana extends javax.swing.JFrame {
             mostrarMatricula(dialogoVehiculo.getMatricula());
             mostrarGrupo(dialogoVehiculo.getGrupo());
             mostrarTipo(dialogoVehiculo.getTipo());
-            if(cbTipo.getSelectedItem().equals("TURISMO")){
+            if (cbTipo.getSelectedItem().equals("TURISMO")) {
                 mostrarPlazas(dialogoVehiculo.getPlazas());
-            }else{
-                mostrarCapacidad(dialogoVehiculo.getCapacidad());}
+            } else {
+                mostrarCapacidad(dialogoVehiculo.getCapacidad());
+            }
             controlador.crearVehiculo();
             this.actualizarTabla();
             dialogoVehiculo.limpiarCampos();
@@ -417,18 +426,18 @@ public class Ventana extends javax.swing.JFrame {
     private void miBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miBuscarActionPerformed
         // TODO add your handling code here:
         String matricula;
-        
-       matricula=JOptionPane.showInputDialog(this,"Introduce Matricula");
-       if(matricula!=null){
-           this.mostrarMatricula(matricula);
-        controlador.buscarVehiculo();   
-       }
-        
+
+        matricula = JOptionPane.showInputDialog(this, "Introduce Matricula");
+        if (matricula != null) {
+            this.mostrarMatricula(matricula);
+            controlador.buscarVehiculo();
+        }
+
     }//GEN-LAST:event_miBuscarActionPerformed
 
     private void bMasBaratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMasBaratoActionPerformed
         // TODO add your handling code here:
-       controlador.buscarVehiculoMasBarato();
+        controlador.buscarVehiculoMasBarato();
     }//GEN-LAST:event_bMasBaratoActionPerformed
 
     private void bMasCaroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMasCaroActionPerformed
@@ -438,16 +447,17 @@ public class Ventana extends javax.swing.JFrame {
 
     private void bBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBorrarActionPerformed
         // TODO add your handling code here:
-        String matricula;
-        matricula=JOptionPane.showInputDialog(this,"Introduce Matricula");
-        if(matricula!=null){
-        this.solicitarConfirmacion();
-        controlador.borrarVehiculo();
+      
+        if (tMatricula.getText().trim().length()>0) {
+            if(this.solicitarConfirmacion()){
+            controlador.borrarVehiculo();
+            }
         }
     }//GEN-LAST:event_bBorrarActionPerformed
 
     private void bModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bModificarActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_bModificarActionPerformed
 
     private void bListarVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bListarVehiculosActionPerformed
@@ -457,7 +467,7 @@ public class Ventana extends javax.swing.JFrame {
 
     private void bMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMatriculaActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_bMatriculaActionPerformed
     public String getMatricula() {
         return this.tMatricula.getText();
@@ -488,13 +498,15 @@ public class Ventana extends javax.swing.JFrame {
         return bgOrdenListado.getSelection().getActionCommand();
     }
 
-    public String getFiltroGrupo(){
-        
+    public String getFiltroGrupo() {
+
         return this.cbFiltrarGrupo.getSelectedItem().toString();
     }
-    public String getFiltroTipo(){
+
+    public String getFiltroTipo() {
         return this.cbFiltrarTipo.getSelectedItem().toString();
     }
+
     public void mostrarMatricula(String matricula) {
         this.tMatricula.setText(matricula);
     }
@@ -529,7 +541,7 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     public boolean solicitarConfirmacion() {
-        if (JOptionPane.showConfirmDialog(this, "¿Estás seguro de Borrar? Será permanente") == JOptionPane.OK_OPTION) {
+        if (JOptionPane.showConfirmDialog(this, "¿Estás seguro? Será permanente") == JOptionPane.OK_OPTION) {
             return true;
         }
         return false;
@@ -539,7 +551,18 @@ public class Ventana extends javax.swing.JFrame {
         this.controlador = controlador;
     }
 
-    
+    private void vehiculoSeleccionado(ListSelectionEvent lse) {
+        int fila = tablaVehiculos.getSelectedRow();
+        if (fila >= 0) {
+            mostrarMatricula((String) tablaVehiculos.getValueAt(fila, 0));
+            mostrarTipo((String) tablaVehiculos.getValueAt(fila, 1));
+            mostrarGrupo((String) tablaVehiculos.getValueAt(fila, 2));
+            mostrarPlazas((int) tablaVehiculos.getValueAt(fila, 3));
+            mostrarCapacidad((float) tablaVehiculos.getValueAt(fila, 4));
+            mostrarPrecioAlquiler((float) tablaVehiculos.getValueAt(fila, 5));
+
+        }
+    }
 
     public void mostrar() {
         setVisible(true);

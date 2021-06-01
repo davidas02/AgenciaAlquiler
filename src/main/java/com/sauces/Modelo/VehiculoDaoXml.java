@@ -6,12 +6,16 @@
 package com.sauces.Modelo;
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.StreamException;
 import com.thoughtworks.xstream.io.xml.DomDriver;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -31,25 +35,43 @@ Path path;
         this.path = path;
     }
     @Override
-    public List<Vehiculo> listar() {
-     List<Vehiculo> vehiculos=new ArrayList<>();
-        return vehiculos;    
+    public List<Vehiculo> listar() throws DaoException{
+     List<Vehiculo> listado=new ArrayList<>();
+        XStream xstream=new XStream(new DomDriver());
+        
+        XStream.setupDefaultSecurity(xstream);
+        xstream.allowTypeHierarchy(Turismo.class);
+        xstream.allowTypeHierarchy(Furgoneta.class);
+        try(BufferedReader archivo=Files.newBufferedReader(path)){
+            listado=(List<Vehiculo>)xstream.fromXML(archivo);
+        } catch (NoSuchFileException nsfe){
+            throw new DaoException("Error en el nombre del fichero");
+        }catch(StreamException se){
+            throw new DaoException("Formato de datos incorrecto");
+        }catch (IOException ex) {
+            Logger.getLogger(VehiculoDaoXml.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listado;
     }
 
     @Override
-    public int insertar(List<Vehiculo> vehiculos) {
-       int n=0;
+     public int insertar(List<Vehiculo> vehiculos) throws DaoException {
+        int n=0;
         XStream xstream=new XStream(new DomDriver());
+        
         XStream.setupDefaultSecurity(xstream);
-        xstream.allowTypeHierarchy(Furgoneta.class);
         xstream.allowTypeHierarchy(Turismo.class);
-        try(BufferedWriter fichero=Files.newBufferedWriter(path)){
-        xstream.toXML(vehiculos,fichero);
-                n=vehiculos.size();
+        xstream.allowTypeHierarchy(Furgoneta.class);
+        
+        try(BufferedWriter archivo=Files.newBufferedWriter(path)){
+            xstream.toXML(vehiculos,archivo);
+            n=vehiculos.size();
+        } catch (NoSuchFileException nsfe){
+            throw new DaoException("Error en el nombre del fichero");
         } catch (IOException ex) {
-            System.out.println(ex);
+            throw new DaoException("Error de E/S");
         }
-        return n; 
+        return n;
     }
     
 }

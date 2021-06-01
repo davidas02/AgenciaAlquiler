@@ -12,6 +12,6 @@ import java.util.List;
  * @author daw1
  */
 public interface VehiculoDao {
-    public List<Vehiculo> listar();
-    public int insertar(List<Vehiculo>vehiculos);
+    public List<Vehiculo> listar() throws DaoException;
+    public int insertar(List<Vehiculo>vehiculos)throws DaoException;
 }

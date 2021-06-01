@@ -49,11 +49,11 @@ public class VehiculoTableModel extends AbstractTableModel{
        Vehiculo v=listadoVehiculos.get(rowIndex);
         Object o=null;
         switch(columnIndex){
-           case 0:o=v.getMatricula();
+           case 0:o=v.getMatricula().toString();
             break;
            case 1:o=v.getClass().getSimpleName();
             break;
-           case 2:o=v.getGrupo();
+           case 2:o=v.getGrupo().toString();
            break;
            case 3: if(v instanceof Turismo){
                o=((Turismo) v).getPlazas();
