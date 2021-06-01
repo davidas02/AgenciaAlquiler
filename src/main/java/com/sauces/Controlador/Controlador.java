@@ -116,12 +116,14 @@ public class Controlador {
         int n = 0;
         archivo = vista.getArchivo();
         vehiculoDao = getDao(archivo);
-
+        
         if (vehiculoDao != null) {
             try {
                 agenciaAlquiler.setVehiculoDao(vehiculoDao);
-                n = agenciaAlquiler.guardarVehiculos();
+                n=agenciaAlquiler.guardarVehiculos();
+                if(n>0){
                 vista.mostrarMensaje("se ha guardado " + n + " Vehiculos");
+                }
             } catch (DaoException ex) {
                 vista.mostrarMensaje(ex.getMessage());
             }
@@ -140,8 +142,9 @@ public class Controlador {
             try {
                agenciaAlquiler.setVehiculoDao(vehiculoDao);
                 n =agenciaAlquiler.cargarVehiculos();
-
+               if(n>0){
                 vista.mostrarMensaje("Se han cargado " + n + " Vehiculos");
+                }
             } catch (DaoException ex) {
                 vista.mostrarMensaje(ex.getMessage());
             }
