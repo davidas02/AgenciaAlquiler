@@ -91,6 +91,33 @@ public class Controlador {
     }
 
     public void modificarVehiculo() {
+        String matricula=vista.getMatricula();
+        Vehiculo v = agenciaAlquiler.consultarVehiculo(matricula);
+        if(v!=null){
+       
+        Grupo grupo=Grupo.valueOf(vista.getGrupo());
+        String tipo=vista.getTipo();
+       v.setGrupo(grupo);
+        if(tipo.equals("TURISMO")){
+            
+                int plazas=vista.getPlazas();
+               ((Turismo)v).setPlazas(plazas);
+               
+        }    
+        else{
+                float capacidad=vista.getCapacidad();
+               ((Furgoneta)v).setCapacidad(capacidad);
+            
+        }     
+             vista.actualizarTabla();
+        
+       
+            vista.mostrarPrecioAlquiler(v.getPrecioAlquiler());
+            vista.mostrarMensaje("Vehículo modificado");
+       
+        }else{
+            vista.mostrarMensaje("No se ha podido modificar el vehículo");
+        }
        
     }
 
@@ -99,13 +126,19 @@ public class Controlador {
         for(Vehiculo v:agenciaAlquiler.getFlota()){
         String grupo=vista.getFiltroGrupo();
         String tipo=vista.getFiltroTipo();
+        String orden=vista.getOrden();
         if(tipo.equals("TODOS") || v.getClass().getSimpleName().toUpperCase().equals(tipo)){
             if(grupo.equals("TODOS")||v.getGrupo().equals(Grupo.valueOf(grupo))){
             listado.add(v);
             }
         }
+        if(orden.equals("MATRICULA")){
+            Collections.sort(listado);
+        }else{
+            Collections.sort(listado,new ComparadorPrecio());
         }
-        Collections.sort(listado);
+        }
+    
          vista.listarVehiculos(listado);
     }
 

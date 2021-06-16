@@ -23,6 +23,12 @@ public abstract class Vehiculo implements Comparable<Vehiculo>,Serializable {
         this.matricula = new Matricula(matricula);
         this.grupo = grupo;
     }
+    public Grupo getGrupo() {
+        return grupo;
+    }
+    public void setGrupo(Grupo grupo) {
+        this.grupo = grupo;
+    }
 
     public Matricula getMatricula() {
         return matricula;
@@ -58,11 +64,6 @@ public abstract class Vehiculo implements Comparable<Vehiculo>,Serializable {
         }
         return false;
     }
-
-    public Grupo getGrupo() {
-        return grupo;
-    }
-
     @Override
     public int compareTo(Vehiculo v) {
         return this.matricula.compareTo(v.matricula);

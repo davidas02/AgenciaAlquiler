@@ -457,7 +457,8 @@ public class Ventana extends javax.swing.JFrame {
 
     private void bModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bModificarActionPerformed
         // TODO add your handling code here:
-        
+        controlador.modificarVehiculo();
+        this.actualizarTabla();
     }//GEN-LAST:event_bModificarActionPerformed
 
     private void bListarVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bListarVehiculosActionPerformed
@@ -495,7 +496,11 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     public String getOrden() {
-        return bgOrdenListado.getSelection().getActionCommand();
+       if(bMatricula.isSelected()){
+       return "MATRICULA";
+       }else{
+       return "PRECIO";
+       }
     }
 
     public String getFiltroGrupo() {
